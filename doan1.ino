@@ -7,7 +7,7 @@
 // ======= Cảm biến độ ẩm đất (Sử dụng pins ADC) ========
 #define MOISTURE_PIN_0 15    // Chuyển sang pins ADC trên ESP32
 #define MOISTURE_PIN_1 17
-#define MOISTURE_PIN_2 18    // ESP32 không có GPIO 37, sử dụng 39 thay thế
+#define MOISTURE_PIN_2 18   
 
 // ======= Cấu hình cây và tưới =======
 #define SERVO_PIN 21
@@ -16,17 +16,17 @@
 #define SAMPLES_COUNT 10     // Số lần lấy mẫu cho mỗi cảm biến
 
 
-#define servoPosition0 0    // góc quay đến cây 1
-#define triggerValue0 3400  // ngưỡng cảm biến đất cho cây 1 (0-4095)
-#define wateringTime0 20000   // ms tưới cây 1
+#define servoPosition0 80    // góc quay đến cây 1
+#define triggerValue0 4000  // ngưỡng cảm biến đất cho cây 1 (0-4095)
+#define wateringTime0 3000   // ms tưới cây 1
 
-#define servoPosition1 100
-#define triggerValue1 3300
-#define wateringTime1 20000
+#define servoPosition1 45
+#define triggerValue1 3900
+#define wateringTime1 3000
 
-#define servoPosition2 180
-#define triggerValue2 3000
-#define wateringTime2 20000
+#define servoPosition2 10
+#define triggerValue2 4000
+#define wateringTime2 3000
 
 Servo positionServo;
 int moistureValue0 = 0;
@@ -38,8 +38,8 @@ bool isWatering = false;
 int currentWateringZone = -1;  // -1 nghĩa là không tưới khu nào
 
 //======= WiFi & MQTT HiveMQ =========
-const char* ssid = "Trang T4";
-const char* password = "688699688";
+const char* ssid = "Redmi Note 12 Pro";
+const char* password = "12345678k";
 
 const char* mqtt_server = "d39af0392518478980c1e73505500d1b.s1.eu.hivemq.cloud";
 const int mqtt_port = 8883;
@@ -54,6 +54,11 @@ const char* TOPIC_STOP_WATERING = "control/stop";      // Topic nhận lệnh d�
 const char* TOPIC_CONTROL_REFRESH = "control/refresh"; // Topic nhận lệnh cập nhật dữ liệu
 
 WiFiClientSecure espClient;
+
+
+
+
+
 PubSubClient client(espClient);
 
 // ======= Kết nối WiFi ==========
